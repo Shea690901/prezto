@@ -10,10 +10,23 @@
 #
 
 # Set case-sensitivity for completion, history lookup, etc.
-# zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' case-sensitive 'yes'
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
+
+zstyle ':prezto:module:ssh:load' identities '*.pub(:r)'
+
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Add additional directories to load prezto modules from
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
@@ -22,7 +35,7 @@ zstyle ':prezto:*:*' color 'yes'
 # zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
-# zstyle ':prezto:load' zmodule 'attr' 'stat'
+zstyle ':prezto:load' zmodule 'attr' 'datetime' 'mathfunc' 'pcre' 'system'
 
 # Set the Zsh functions to load (man zshcontrib).
 # zstyle ':prezto:load' zfunction 'zargs' 'zmv'
@@ -30,15 +43,23 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
+  'archive' \
   'directory' \
+  'editor' \
+  'environment' \
+  'git' \
+  'gpg' \
+  'history' \
+  'node' \
+  'rsync' \
   'spectrum' \
+  'ssh' \
+  'syntax-highlighting' \
+  'terminal' \
   'utility' \
   'completion' \
   'history-substring-search' \
+  'autosuggestions' \
   'prompt'
 
 #
@@ -57,6 +78,12 @@ zstyle ':prezto:load' pmodule \
 #   '0.0.0.0' '127.0.0.1'
 
 #
+# DIRECTORY
+#
+
+unsetopt auto_cd auto_pushd
+
+#
 # Editor
 #
 
@@ -67,14 +94,20 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 # Allow the zsh prompt context to be shown.
-#zstyle ':prezto:module:editor' ps-context 'yes'
+zstyle ':prezto:module:editor' ps-context 'yes'
+
+#
+# Environment
+#
+
+setopt CHECK_JOBS
 
 #
 # Git
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
@@ -82,6 +115,16 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Set the command prefix on non-GNU systems.
 # zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+#
+# History
+#
+
+setopt APPEND_HISTORY
+zstyle ':prezto:module:history' histfile "${ZDOTDIR}/history/${${TTY#/dev/}//\//_}"
+#HISTSIZE=1000
+zstyle ':prezto:module:history' histsize 1000
+#zstyle ':prezto:module:history' savehist 2000
 
 #
 # History Substring Search
@@ -117,7 +160,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
