@@ -35,7 +35,7 @@ a la='ll -a'
 a lc='lt -tchanged'
 a lk='ll -rssize'
 a lr='ll -T'
-a lx='ll -sextension -I'*~' -I'.*~'
+a lx="ll -sextension -I'*~' -I'.*~'"
 
 # To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
 [[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
